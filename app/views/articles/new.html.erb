@@ -4,11 +4,17 @@
     <div>
         <%= form.label :title %><br>
         <% form.text_field :title %>
+        <% @article.error.full_messages_for(:title).each do |mesage|%>
+            <div><%= message %></div>
+        <% end %>
     </div>
 
      <div>
         <%= form.label :body %><br>
         <% form.text_area :body %>
+         <% @article.error.full_messages_for(:body).each do |mesage|%>
+            <div><%= message %></div>
+        <% end %>
     </div>
 
     <div>
