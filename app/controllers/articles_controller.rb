@@ -1,13 +1,12 @@
 class ArticlesController < ApplicationController
+  http_basic_authenticate_with name: 'dhh', password: 'secret', except: %i[index show]
 
-  http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
-  
   def index
     @articles = Article.all
   end
 
   def show
-    @article = Article.find(params[:id])    
+    @article = Article.find(params[:id])
   end
 
   def new
@@ -17,7 +16,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
 
-    if @article.save 
+    if @article.save
       redirect_to @article
     else
       render :new
@@ -43,10 +42,10 @@ class ArticlesController < ApplicationController
 
     redirect_to root_path
   end
-
 end
 
-private 
-  def article_params
-    params.require(:article).permit(:title, :body)
-  end
+private
+
+def article_params
+  params.require(:article).permit(:title, :body)
+end
